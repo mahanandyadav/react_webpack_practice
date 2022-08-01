@@ -1,19 +1,22 @@
 const express = require('express')
 const fs=require('fs')
+const path=require('path')
 const loginRoute = new express.Router()
 
+// const path=require('../data/data.json')
 
-function readFile(path,enco){
+let pathFile=path.resolve(__dirname,'..','data','data.json')
+function readFile(enco){
     try{
-        return  JSON.parse( fs.readFileSync(path,enco)  )
+        return  JSON.parse( fs.readFileSync(pathFile,enco)  )
     }catch(err){
         console.log(err)
         return
     }
 }
-function writeFile(path,data){
+function writeFile(data){
     try{
-        return fs.writeFileSync(path,JSON.stringify(data))
+        return fs.writeFileSync(pathFile,JSON.stringify(data))
     }catch(err){
         console.log(err)
         return
@@ -21,7 +24,7 @@ function writeFile(path,data){
 }
 
 
-let data=readFile('./data/data.json','utf8')
+let data=readFile('utf8')
 
 
 loginRoute.post('/signup', (req, res) => {
@@ -31,7 +34,7 @@ loginRoute.post('/signup', (req, res) => {
         ...data,
        { ...req.body,key:[]}
     ]
-    writeFile('./data/data.json',data)
+    writeFile(data)
     res.send({ "message": 'signup success', "users": data })
 })
 
@@ -44,7 +47,7 @@ loginRoute.put('/login', (req, res) => {
                 ...data,
                 { ...user[0], key: [...user[0].key, 'xyz'] }
             ]
-            writeFile('./data/data.json',data)
+            writeFile(data)
             console.log('login sucessfull')
             res.send({ "message": "login done", 'data': data })
         } else {
