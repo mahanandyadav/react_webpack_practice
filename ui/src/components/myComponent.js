@@ -1,30 +1,41 @@
-import React, { useEffect, useState, useMemo, useCallback } from "react";
+import React from "react";
 
 
-const MyComponent = () => {
-    let arr = [101, 1200, 320, 44031]
-
-
-
-    const reverse = (ar) => {
-        return ar.map(e => {
-            return Number(e.toString().split("").reverse().join("").replace(/0/g, ""))
-        })
+class MyComponent extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            fav: 'yellow'
+        }
     }
 
-    useEffect(() => {
-        console.log(reverse(arr))
-    }, [])
+    componentDidMount() {
+        setTimeout(() => {
+            this.setState  ({
+                // fav: 'pink'
+            })
+        }, 1000)
+    }
+    getSnapshotBeforeUpdate(prevProps, prevState) {
+        document.getElementById("div1").innerHTML="pev color" + prevState.fav;
+        return null
+    }
+    componentDidUpdate() {
+        document.getElementById("div2").innerHTML="current color" + this.state.fav
+    }
 
-    return (
-        <div>
-            <h1>{arr}</h1>
-            <h1>{reverse}</h1>
-        </div>
-    )
 
+
+    render() {
+        return (
+            <div>
+                <h1>{this.state.fav}</h1>
+                <div id="div1"  ></div>
+                <div id="div2" ></div>
+            </div>
+        )
+    }
 }
 
 
-
-export default (MyComponent)
+export default MyComponent

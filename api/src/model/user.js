@@ -16,7 +16,8 @@ const userSchema=new mongoose.mongoose.Schema({
         type:String,
         require:true,
         trim:true
-    }
+    },
+    key:[]
 })
 
 const Users=mongoose.model('Users',userSchema)
