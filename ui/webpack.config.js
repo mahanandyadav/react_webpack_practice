@@ -1,19 +1,19 @@
-const HtmlWebpackPlugin=require('html-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 const resolve = require('path').resolve;
 
 // import React from 'react'
-const React =require('react')
+const React = require('react')
 module.exports = {
   devtool: 'eval-source-map',
-//   externals: {
-//     'react': 'React'
-// },
-output: {
-  // hotUpdateMainFilename: '[id].hot-update.[fullhash].json',
-  // hotUpdateChunkFilename: '[id].hot-update.[fullhash].js',
-  path: resolve(__dirname, 'dist'),
-  filename: 'main.js',
-},
+  //   externals: {
+  //     'react': 'React'
+  // },
+  output: {
+    // hotUpdateMainFilename: '[id].hot-update.[fullhash].json',
+    // hotUpdateChunkFilename: '[id].hot-update.[fullhash].js',
+    path: resolve(__dirname, 'dist'),
+    filename: 'main.js',
+  },
   module: {
     rules: [
       {
