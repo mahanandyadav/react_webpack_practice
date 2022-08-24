@@ -2,8 +2,9 @@
 
 
 const express = require('express')
-const app = express()
 const crypto = require('crypto')
+const app = express()
+const Worker=require('webworker-threads')
 app.use(express.json())
 
 
@@ -14,7 +15,6 @@ app.get('/', (req, res) => {
         console.log('1', Date.now() - start)
         res.send('hello')
     })
-
 })
 
 app.get('/fast', (req, res) => {
